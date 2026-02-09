@@ -4,9 +4,7 @@ export default function HomePage() {
   return (
     <main style={{ padding: 24, maxWidth: 960, margin: "0 auto" }}>
       <h1 style={{ marginBottom: 8 }}>Tapasya AI Assistant</h1>
-      <p style={{ marginTop: 0 }}>
-        Hybrid chatbot: rule-based + semantic search (Qdrant) + DeepSeek.
-      </p>
+
       <WidgetDemo />
       <section style={{ marginTop: 32 }}>
         <h2>Embed Snippet</h2>
