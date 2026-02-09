@@ -10,6 +10,8 @@ export default function WidgetDemo() {
           borderRadius: 12,
           padding: 16,
           background: "#f8fafc",
+          display: "flex",
+          justifyContent: "flex-end"
         }}
       >
         <Widget />

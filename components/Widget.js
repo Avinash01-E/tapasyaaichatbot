@@ -250,21 +250,22 @@ export default function Widget({ embedded = false }) {
                 }}
               />
             </div>
-            <button
-              type="submit"
-              style={{
-                marginTop: 10,
-                borderRadius: 10,
-                border: "none",
-                background: "#0f172a",
-                color: "white",
-                padding: "8px 12px",
-                fontWeight: 600,
-                cursor: "pointer",
-              }}
-            >
-              Continue
-            </button>
+            <div style={{ display: "flex", justifyContent: "flex-end", marginTop: 10 }}>
+              <button
+                type="submit"
+                style={{
+                  borderRadius: 10,
+                  border: "none",
+                  background: "#0f172a",
+                  color: "white",
+                  padding: "8px 12px",
+                  fontWeight: 600,
+                  cursor: "pointer",
+                }}
+              >
+                Continue
+              </button>
+            </div>
           </form>
         )}
         {loading && (

@@ -6,7 +6,13 @@ export const metadata = {
 
 export default function WidgetPage() {
   return (
-    <div style={{ height: "100vh" }}>
+    <div style={{
+      height: "100vh",
+      display: "flex",
+      justifyContent: "flex-end",
+      alignItems: "center",
+      padding: "20px"
+    }}>
       <Widget embedded />
     </div>
   );
