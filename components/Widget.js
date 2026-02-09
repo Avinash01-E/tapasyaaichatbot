@@ -209,14 +209,23 @@ export default function Widget({ embedded = false }) {
                 }}
               />
               <input
+                type="tel"
                 value={profile.mobile}
-                onChange={(event) =>
-                  setProfile((current) => ({
-                    ...current,
-                    mobile: event.target.value,
-                  }))
-                }
-                placeholder="Mobile Number"
+                onChange={(event) => {
+                  // Only allow numeric characters
+                  const numericValue = event.target.value.replace(/[^0-9]/g, '');
+                  // Limit to 10 digits
+                  if (numericValue.length <= 10) {
+                    setProfile((current) => ({
+                      ...current,
+                      mobile: numericValue,
+                    }));
+                  }
+                }}
+                placeholder="Mobile Number (10 digits)"
+                minLength={10}
+                maxLength={10}
+                pattern="[0-9]{10}"
                 style={{
                   borderRadius: 10,
                   border: "1px solid #e2e8f0",
