@@ -46,64 +46,65 @@ function buildContext({ ruleHit, qdrantResults, fallbackRows, qbRows }) {
 }
 
 export async function POST(request) {
-  const { messages = [], sessionId = "default", userProfile = {} } = await request.json();
-  const latestUserMessage = [...messages].reverse().find((m) => m.role === "user");
-  const userText = latestUserMessage?.content || "";
-
-  // Extract user profile information
-  const userName = userProfile?.name || "";
-  const userCourse = userProfile?.course || "";
-
-  if (!userText) {
-    return Response.json({ reply: "Please ask a question." }, { status: 400 });
-  }
-
-  const ruleHit = applyRules(userText);
-  if (ruleHit) {
-    await saveMessage({ sessionId, role: "user", content: userText });
-    await saveMessage({ sessionId, role: "assistant", content: ruleHit.reply });
-    return Response.json({ reply: ruleHit.reply });
-  }
-
-  let qdrantResults = [];
-  let fallbackRows = [];
-  let qbRows = [];
-
   try {
-    const embedding = await deepseekEmbed(userText);
-    if (embedding?.length) {
-      qdrantResults = await searchQdrant({ queryEmbedding: embedding });
+    const { messages = [], sessionId = "default", userProfile = {} } = await request.json();
+    const latestUserMessage = [...messages].reverse().find((m) => m.role === "user");
+    const userText = latestUserMessage?.content || "";
+
+    // Extract user profile information
+    const userName = userProfile?.name || "";
+    const userCourse = userProfile?.course || "";
+
+    if (!userText) {
+      return Response.json({ reply: "Please ask a question." }, { status: 400 });
     }
-  } catch (error) {
-    fallbackRows = await loadKnowledgeFallback(userText);
-  }
 
-  if (!fallbackRows.length) {
-    qbRows = await loadQuestionBank(userText);
-  }
-
-  const context = buildContext({
-    ruleHit,
-    qdrantResults,
-    fallbackRows,
-    qbRows,
-  });
-  const hasContext = context !== "No context available.";
-
-  // Build user profile context string
-  let userProfileContext = "";
-  if (userName || userCourse) {
-    userProfileContext = "\n\nUser Information:";
-    if (userName) {
-      userProfileContext += `\n- Name: ${userName}`;
+    const ruleHit = applyRules(userText);
+    if (ruleHit) {
+      await saveMessage({ sessionId, role: "user", content: userText });
+      await saveMessage({ sessionId, role: "assistant", content: ruleHit.reply });
+      return Response.json({ reply: ruleHit.reply });
     }
-    if (userCourse) {
-      userProfileContext += `\n- Interested Course: ${userCourse}`;
-    }
-  }
 
-  // Conversational flow instructions
-  const conversationInstructions = `
+    let qdrantResults = [];
+    let fallbackRows = [];
+    let qbRows = [];
+
+    try {
+      const embedding = await deepseekEmbed(userText);
+      if (embedding?.length) {
+        qdrantResults = await searchQdrant({ queryEmbedding: embedding });
+      }
+    } catch (error) {
+      fallbackRows = await loadKnowledgeFallback(userText);
+    }
+
+    if (!fallbackRows.length) {
+      qbRows = await loadQuestionBank(userText);
+    }
+
+    const context = buildContext({
+      ruleHit,
+      qdrantResults,
+      fallbackRows,
+      qbRows,
+    });
+    const hasContext = context !== "No context available.";
+
+    // Build user profile context string
+    let userProfileContext = "";
+    if (userName || userCourse) {
+      userProfileContext = "\n\nUser Information:";
+      if (userName) {
+        userProfileContext += `\n- Name: ${userName}`;
+      }
+      if (userCourse) {
+        userProfileContext += `\n- Interested Course: ${userCourse}`;
+      }
+    }
+
+    // Conversational flow instructions
+    const conversationInstructions = `
 YOU ARE TAPASYA AI ASSISTANT - STRICT GUIDELINES:
 
 CRITICAL FORMATTING RULES (MUST FOLLOW):
@@ -141,12 +142,19 @@ CONVERSATION FLOW:
 4. Be helpful about fees, faculty, course details when asked.
 `;
 
-  const system = `You are Tapasya AI Assistant - a helpful guide for students interested in Tapasya Institutions.${userProfileContext}\n${conversationInstructions}`;
+    const system = `You are Tapasya AI Assistant - a helpful guide for students interested in Tapasya Institutions.${userProfileContext}\n${conversationInstructions}`;
 
-  const reply = await deepseekChat({ messages, system });
+    const reply = await deepseekChat({ messages, system });
 
-  await saveMessage({ sessionId, role: "user", content: userText });
-  await saveMessage({ sessionId, role: "assistant", content: reply });
+    await saveMessage({ sessionId, role: "user", content: userText });
+    await saveMessage({ sessionId, role: "assistant", content: reply });
 
-  return Response.json({ reply });
+    return Response.json({ reply });
+  } catch (error) {
+    console.error("Chat API Error:", error);
+    return Response.json(
+      { reply: "I'm having trouble processing your request right now. Please try again in a moment." },
+      { status: 200 } // Return 200 to avoid error display on frontend
+    );
+  }
 }
