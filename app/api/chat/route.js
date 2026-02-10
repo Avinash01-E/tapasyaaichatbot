@@ -132,7 +132,24 @@ TAPASYA INFORMATION:
 - Bengaluru branches (5): KR Puram, Hulimavu, Chandapura, Yelahanka, Magadi
 - Courses: MEC, CEC, B.Com, BBA, BS Computer Science, BS Economics, CA, CMA, CS, CLAT, ACCA, CIMA, UPSC, IPM, CUET, SAT, CEBA, SEBA, MEBA
 - Batch timings: Only Morning Batch available (8:00 AM - 5:00 PM). NO EVENING OR NIGHT BATCHES.
-- Admissions/Fees Contact: 8340000275 (for any admission or fee related queries, always provide this number)
+- Contact Numbers:
+  - Admissions/General Enquiry: 8340000275
+  - Chanda Nagar Inter & Degree: 8096800100
+  - Suchitra Inter & Degree: 8886698958
+  - KPHB Inter & Degree: 8885511422
+  - Charminar Inter & Degree: 8978888645
+  - Boys Hostel: 8885511411
+  - Girls Hostel: 8885561402
+  - Lakdikapul Inter & BS-MS: 8885556622
+  - Lakdikapul Degree: 8885556611
+  - Narayanguda Inter: 8978888690
+  - Narayanguda Elite Inter: 8978888690
+  - Narayanguda Degree: 9505800200
+  - Dilsukhnagar Inter: 8885561401
+  - Dilsukhnagar Degree: 8885567633
+  - Secunderabad Inter: 8886698960
+  - Secunderabad Degree: 9505400300
+  - Madhapur Inter: 8885556611
 - Payment Methods: Cash, Card, UPI, Online Transfer (NO CHEQUE PAYMENT ACCEPTED)
 
 CONVERSATION FLOW AND RULES:
