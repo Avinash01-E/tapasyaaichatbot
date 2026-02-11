@@ -7,11 +7,11 @@ export const metadata = {
 export default function WidgetPage() {
   return (
     <div style={{
-      height: "100vh",
-      display: "flex",
-      justifyContent: "flex-end",
-      alignItems: "center",
-      padding: "20px"
+      height: "100%",
+      width: "100%",
+      // Remove flex alignment so it fills the space naturally
+      padding: 0,
+      margin: 0
     }}>
       <Widget embedded />
     </div>

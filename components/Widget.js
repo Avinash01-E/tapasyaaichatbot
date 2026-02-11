@@ -64,12 +64,13 @@ export default function Widget({ embedded = false }) {
         display: "flex",
         flexDirection: "column",
         height: embedded ? "100%" : 520,
-        maxWidth: 480,
+        width: embedded ? "100%" : undefined,
+        maxWidth: embedded ? "none" : 480,
         background: "white",
-        borderRadius: 16,
-        border: "1px solid #e2e8f0",
+        borderRadius: embedded ? 0 : 16,
+        border: embedded ? "none" : "1px solid #e2e8f0",
         overflow: "hidden",
-        boxShadow: "0 20px 50px rgba(15, 23, 42, 0.08)",
+        boxShadow: embedded ? "none" : "0 20px 50px rgba(15, 23, 42, 0.08)",
       }}
     >
       <header
