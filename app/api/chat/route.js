@@ -150,7 +150,7 @@ TAPASYA INFORMATION:
   - Narayanguda Degree: 9505800200
   - Dilsukhnagar Inter: 8885561401
   - Dilsukhnagar Degree: 8885567633
-  - Secunderabad Inter: 8886698960
+  - Secunderabad Inter: 8886698960₹
   - Secunderabad Degree: 9505400300
   - Madhapur Inter: 8885556611
 - Payment Methods: Cash, Card, UPI, Online Transfer (NO CHEQUE PAYMENT ACCEPTED)
