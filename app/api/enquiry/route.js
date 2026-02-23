@@ -1,6 +1,6 @@
 const ENQUIRY_URL =
   process.env.ENQUIRY_URL ||
-  "http://tapasyauat.edusoftsolution.com/enquiryBot/api/chatBotEnquiry";
+  "https://tapasya.edusoftsolution.com/enquiryBot/api/chatBotEnquiry";
 
 export async function POST(request) {
   const body = await request.json();
